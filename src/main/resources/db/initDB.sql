@@ -1,5 +1,5 @@
-DROP TABLE users IF EXISTS;
 DROP TABLE user_roles IF EXISTS;
+DROP TABLE users IF EXISTS;
 DROP TABLE roles IF EXISTS;
 DROP TABLE menu IF EXISTS;
 DROP TABLE rating IF EXISTS;
@@ -21,9 +21,7 @@ CREATE TABLE users
     name VARCHAR(200) NOT NULL,
     email VARCHAR(200) NOT NULL,
     password VARCHAR(200) NOT NULL,
-    registered TIMESTAMP DEFAULT now() NOT NULL,
-    id_role INTEGER NOT NULL,
-    FOREIGN KEY (id_role) REFERENCES roles(id_role) ON DELETE CASCADE
+    registered TIMESTAMP DEFAULT now() NOT NULL
 );
 CREATE UNIQUE INDEX users_unique_email_idx ON users (email);
 
@@ -32,7 +30,8 @@ CREATE TABLE user_roles
     id_user INTEGER NOT NULL,
     id_role INTEGER NOT NULL,
     FOREIGN KEY (id_user) REFERENCES users(id_user) ON DELETE CASCADE,
-    FOREIGN KEY (id_role) REFERENCES roles(id_role) ON DELETE CASCADE
+    FOREIGN KEY (id_role) REFERENCES roles(id_role) ON DELETE CASCADE,
+    PRIMARY KEY (id_user, id_role)
 );
 
 CREATE TABLE restaurants
