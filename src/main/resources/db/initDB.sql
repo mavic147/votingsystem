@@ -1,4 +1,5 @@
 DROP TABLE users IF EXISTS;
+DROP TABLE user_roles IF EXISTS;
 DROP TABLE roles IF EXISTS;
 DROP TABLE menu IF EXISTS;
 DROP TABLE rating IF EXISTS;
@@ -25,6 +26,14 @@ CREATE TABLE users
     FOREIGN KEY (id_role) REFERENCES roles(id_role) ON DELETE CASCADE
 );
 CREATE UNIQUE INDEX users_unique_email_idx ON users (email);
+
+CREATE TABLE user_roles
+(
+    id_user INTEGER NOT NULL,
+    id_role INTEGER NOT NULL,
+    FOREIGN KEY (id_user) REFERENCES users(id_user) ON DELETE CASCADE,
+    FOREIGN KEY (id_role) REFERENCES roles(id_role) ON DELETE CASCADE
+);
 
 CREATE TABLE restaurants
 (

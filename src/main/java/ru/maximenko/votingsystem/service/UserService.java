@@ -8,8 +8,8 @@ import ru.maximenko.votingsystem.repository.UserRepository;
 
 import java.util.List;
 
-import static ru.maximenko.votingsystem.util.ValidationUtil.checkNotFoundById;
-import static ru.maximenko.votingsystem.util.ValidationUtil.checkNotFound;
+import static ru.maximenko.votingsystem.util.EntityValidationUtil.checkNotFoundById;
+import static ru.maximenko.votingsystem.util.EntityValidationUtil.checkNotFound;
 
 @Service
 public class UserService {
