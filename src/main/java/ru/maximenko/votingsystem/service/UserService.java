@@ -36,7 +36,7 @@ public class UserService {
 
     public User update(User user) {
         Assert.notNull(user, "user must not be null");
-        if (getById(user.getId()) == null) {
+        if (!user.isNew() && getById(user.getId()) == null) {
             return null;
         }
         return checkNotFoundById(userRepository.save(user), user.getId());
