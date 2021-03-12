@@ -7,6 +7,10 @@ import ru.maximenko.votingsystem.repository.MenuRepository;
 @Service
 public class MenuService {
 
-    @Autowired
     private MenuRepository menuRepository;
+
+    @Autowired
+    public void setMenuRepository(MenuRepository menuRepository) {
+        this.menuRepository = menuRepository;
+    }
 }

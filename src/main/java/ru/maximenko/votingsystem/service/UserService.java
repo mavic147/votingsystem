@@ -14,11 +14,15 @@ import static ru.maximenko.votingsystem.util.EntityValidationUtil.checkNotFound;
 @Service
 public class UserService {
 
-    @Autowired
     private UserRepository userRepository;
 
-    public void delete(int id) {
-        checkNotFoundById(userRepository.deleteById(id), id);
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public boolean delete(int id) {
+        return checkNotFoundById(userRepository.deleteById(id), id) != 0;
     }
 
     public User getByEmail(String email) {
@@ -26,7 +30,7 @@ public class UserService {
         return checkNotFound(userRepository.findByEmail(email), "email = " + email);
     }
 
-    public User getById(int id) {
+    public User get(int id) {
         return checkNotFoundById(userRepository.findById(id).orElse(null), id);
     }
 
@@ -35,15 +39,15 @@ public class UserService {
     }
 
     public User update(User user) {
-        Assert.notNull(user, "user must not be null");
-        if (!user.isNew() && getById(user.getId()) == null) {
+        Assert.notNull(user, "User must not be null");
+        if (!user.isNew() && get(user.getId()) == null) {
             return null;
         }
-        return checkNotFoundById(userRepository.save(user), user.getId());
+        return userRepository.save(user);
     }
 
     public User create(User user) {
-        Assert.notNull(user, "user must not be null");
+        Assert.notNull(user, "User must not be null");
         return userRepository.save(user);
     }
 }

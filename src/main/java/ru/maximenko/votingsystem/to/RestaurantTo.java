@@ -41,6 +41,10 @@ public class RestaurantTo {
         this.rating = rating;
     }
 
+    public RestaurantTo getRestaurantTo(int id, String name, Double rating) {
+        return new RestaurantTo(id, name, rating);
+    }
+
     @Override
     public String toString() {
         return "RestaurantTo{" +
