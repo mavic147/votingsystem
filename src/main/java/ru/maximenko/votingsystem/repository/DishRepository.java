@@ -18,6 +18,6 @@ public interface DishRepository extends JpaRepository<Dish, Integer> {
     @Query("DELETE FROM Dish d WHERE d.id =: id")
     int delete(@Param("id") int id);
 
-    @Query("SELECT m.dishPrice FROM Menu m WHERE m.idRestaurant =: idRestaurant AND m.dishName =: dishName")
+    @Query("SELECT m.dishPrice FROM Menu m JOIN Dish d WHERE m.idRestaurant =: idRestaurant AND d.name =: dishName")
     Double getPrice(int idRestaurant, String dishName);
 }

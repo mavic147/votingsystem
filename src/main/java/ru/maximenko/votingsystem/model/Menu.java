@@ -15,10 +15,6 @@ public class Menu extends AbstractBaseEntity {
     @NotNull
     private int idRestaurant;
 
-    @Column(name = "name_dish", nullable = false)
-    @NotBlank
-    private String dishName;
-
     @Column(name = "price_dish", nullable = false)
     @NotNull
     private Double dishPrice;
