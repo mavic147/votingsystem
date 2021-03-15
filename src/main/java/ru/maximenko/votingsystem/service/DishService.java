@@ -50,10 +50,4 @@ public class DishService {
         }
         return dishRepository.save(dish);
     }
-
-    public Double getPrice(int idRestaurant, String dishName) {
-        Assert.notNull(dishName, "Name must not be null!");
-        checkNotFound(getByName(dishName), "name = " + dishName);
-        return dishRepository.getPrice(idRestaurant, dishName);
-    }
 }

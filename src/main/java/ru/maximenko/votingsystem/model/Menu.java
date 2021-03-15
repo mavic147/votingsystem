@@ -3,7 +3,6 @@ package ru.maximenko.votingsystem.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -14,6 +13,10 @@ public class Menu extends AbstractBaseEntity {
     @Column(name = "id_restaurant", nullable = false)
     @NotNull
     private int idRestaurant;
+
+    @Column(name = "id_dish", nullable = false)
+    @NotNull
+    private int idDish;
 
     @Column(name = "price_dish", nullable = false)
     @NotNull
