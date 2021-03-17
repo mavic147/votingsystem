@@ -1,10 +1,9 @@
 package ru.maximenko.votingsystem.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "menu")
@@ -25,6 +24,9 @@ public class Menu extends AbstractBaseEntity {
     @Column(name = "date_last", nullable = false)
     @NotNull
     private LocalDate dateChange;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dish")
+    private Set<Dish> dishes;
 
     public Menu(Integer id, Double dishPrice, LocalDate dateChange) {
         super(id);

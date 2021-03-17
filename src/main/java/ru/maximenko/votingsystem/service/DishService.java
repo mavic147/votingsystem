@@ -8,7 +8,6 @@ import ru.maximenko.votingsystem.repository.DishRepository;
 
 import java.util.List;
 
-import static ru.maximenko.votingsystem.util.EntityValidationUtil.checkNotFound;
 import static ru.maximenko.votingsystem.util.EntityValidationUtil.checkNotFoundById;
 
 @Service
@@ -23,11 +22,6 @@ public class DishService {
 
     public Dish get(int id) {
         return checkNotFoundById(dishRepository.findById(id).orElse(null), id);
-    }
-
-    public Dish getByName(String name) {
-        Assert.notNull(name, "Name must not be null!");
-        return checkNotFound(dishRepository.findByName(name), "name = " + name);
     }
 
     public List<Dish> getAll() {

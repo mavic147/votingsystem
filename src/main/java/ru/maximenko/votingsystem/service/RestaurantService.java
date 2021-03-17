@@ -7,9 +7,7 @@ import ru.maximenko.votingsystem.model.Restaurant;
 import ru.maximenko.votingsystem.repository.RestaurantRepository;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import static ru.maximenko.votingsystem.util.EntityValidationUtil.checkNotFound;
 import static ru.maximenko.votingsystem.util.EntityValidationUtil.checkNotFoundById;
 
 @Service
@@ -24,15 +22,6 @@ public class RestaurantService {
 
     public Restaurant get(int id) {
         return checkNotFoundById(restaurantRepository.findById(id).orElse(null), id);
-    }
-
-    public Restaurant getByName(String name) {
-        Assert.notNull(name, "Name must not be null!");
-        return checkNotFound(restaurantRepository.findByName(name), "name = " + name);
-    }
-
-    public List<Restaurant> getAll() {
-        return restaurantRepository.findAll();
     }
 
     public Restaurant create(Restaurant restaurant) {

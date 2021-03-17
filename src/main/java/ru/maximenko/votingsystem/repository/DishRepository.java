@@ -11,8 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface DishRepository extends JpaRepository<Dish, Integer> {
 
-    Dish findByName(String name);
-
     @Transactional
     @Modifying
     @Query("DELETE FROM Dish d WHERE d.id =: id")

@@ -42,9 +42,4 @@ public class MenuService {
     public Menu get(int id) {
         return checkNotFoundById(menuRepository.findById(id).orElse(null), id);
     }
-
-    //returns all dishes belonging to a certain restaurant
-    public List<Menu> getAllDishesOfOneRestaurant(int restaurantId) {
-        return checkNotFoundById(menuRepository.findDishesByRestaurantId(restaurantId), restaurantId);
-    }
 }
