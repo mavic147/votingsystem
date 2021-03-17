@@ -15,7 +15,7 @@ public class Menu extends AbstractBaseEntity {
     @NotNull
     private int idRestaurant;
 
-    @Column(name = "id_dish", nullable = false)
+    @Column(name = "name_dish", nullable = false)
     @NotBlank
     private String dishName;
 
