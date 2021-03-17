@@ -16,8 +16,6 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
     @Modifying
     int deleteById(int id);
 
-    Restaurant findByName(String name);
-
     @Query("SELECT AVG(r.assessment) FROM Rating r WHERE r.idRestaurant =: idRestaurant AND r.dateCreate =: dateCreate")
     Double countRating(@Param("idRestaurant") int id, @Param("dateCreate") LocalDate date);
 
