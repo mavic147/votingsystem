@@ -1,16 +1,19 @@
 package ru.maximenko.votingsystem.model;
 
+import org.springframework.util.CollectionUtils;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User extends AbstractBaseEntity {
+public class User extends AbstractNamedEntity {
 
     @Column(name = "email", nullable = false, unique = true)
     @Email
@@ -31,14 +34,18 @@ public class User extends AbstractBaseEntity {
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "id_user"))
     @Column(name = "id_role")
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<Role> role;
+    private Set<Role> roles;
 
-    public User(Integer id, String email, String password, Date registrationDate, Set<Role> role) {
-        super(id);
+//    public User(User user) {
+//        this(user.getId(), user.getName(), user.email, user.getPassword(), new Date());
+//    }
+
+    public User(Integer id, String name, String email, String password, Date registrationDate, Set<Role> roles) {
+        super(id, name);
         this.email = email;
         this.password = password;
         this.registrationDate = registrationDate;
-        this.role = role;
+        this.roles = roles;
     }
 
     public User() {}
@@ -67,11 +74,11 @@ public class User extends AbstractBaseEntity {
         this.registrationDate = registrationDate;
     }
 
-    public Set<Role> getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Set<Role> role) {
-        this.role = role;
+    public void setRoles(Set<Role> role) {
+        this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
     }
 }

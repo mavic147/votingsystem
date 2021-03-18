@@ -4,10 +4,11 @@ DELETE FROM USER_ROLES;
 DELETE FROM RESTAURANTS;
 DELETE FROM MENU;
 DELETE FROM RATING;
+ALTER SEQUENCE GLOBAL_SEQ RESTART WITH 100000;
 
 INSERT INTO roles (id_role, name)
 VALUES (100000, 'user'),
-(100001, 'admin');
+       (100001, 'admin');
 
 INSERT INTO users (id_user, name, email, password)
 VALUES (100002, 'UserBob', 'bob@mail.ru', 'bob123'),

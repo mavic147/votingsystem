@@ -1,4 +1,4 @@
-package ru.maximenko.votingsystem.service;
+package ru.maximenko.votingsystem.util;
 
 import org.junit.AssumptionViolatedException;
 import org.junit.rules.Stopwatch;

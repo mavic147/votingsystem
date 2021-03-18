@@ -29,13 +29,15 @@ public class Menu extends AbstractBaseEntity {
 
     @Column(name = "deleted", nullable = false)
     @NotNull
-    private boolean isDeleted;
+    private boolean deleted;
 
-    public Menu(Integer id, String dishName, Double dishPrice, LocalDate dateChange) {
+    public Menu(Integer id, int idRestaurant, String dishName, Double dishPrice, LocalDate dateChange, boolean deleted) {
         super(id);
+        this.idRestaurant = idRestaurant;
         this.dishName = dishName;
         this.dishPrice = dishPrice;
         this.dateChange = dateChange;
+        this.deleted = deleted;
     }
 
     public Menu() {}
@@ -73,10 +75,10 @@ public class Menu extends AbstractBaseEntity {
     }
 
     public boolean isDeleted() {
-        return isDeleted;
+        return deleted;
     }
 
     public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+        this.deleted = deleted;
     }
 }
