@@ -27,6 +27,10 @@ public class Menu extends AbstractBaseEntity {
     @NotNull
     private LocalDate dateChange;
 
+    @Column(name = "deleted", nullable = false)
+    @NotNull
+    private boolean isDeleted;
+
     public Menu(Integer id, String dishName, Double dishPrice, LocalDate dateChange) {
         super(id);
         this.dishName = dishName;
@@ -50,5 +54,13 @@ public class Menu extends AbstractBaseEntity {
 
     public void setDateChange(LocalDate dateChange) {
         this.dateChange = dateChange;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }

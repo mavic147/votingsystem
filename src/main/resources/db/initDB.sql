@@ -46,6 +46,7 @@ CREATE TABLE menu
     name_dish VARCHAR(200) NOT NULL,
     price_dish INTEGER NOT NULL,
     date_last TIMESTAMP DEFAULT now() NOT NULL,
+    deleted BOOLEAN DEFAULT FALSE NOT NULL,
     FOREIGN KEY (id_restaurant) REFERENCES restaurants(id_restaurant) ON DELETE CASCADE
 );
 

@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.maximenko.votingsystem.model.Menu;
-import ru.maximenko.votingsystem.repository.MenuRepository;
+import ru.maximenko.votingsystem.repository.menu.CustomizedMenuDeletionImpl;
+import ru.maximenko.votingsystem.repository.menu.MenuRepository;
 
 import java.util.List;
 
@@ -15,10 +16,12 @@ import static ru.maximenko.votingsystem.util.EntityValidationUtil.checkNotFound;
 public class MenuService {
 
     private MenuRepository menuRepository;
+    private CustomizedMenuDeletionImpl menuDeletion;
 
     @Autowired
-    public void setMenuRepository(MenuRepository menuRepository) {
+    public void setMenuRepository(MenuRepository menuRepository, CustomizedMenuDeletionImpl menuDeletion) {
         this.menuRepository = menuRepository;
+        this.menuDeletion = menuDeletion;
     }
 
     public Menu create(Menu menu) {
@@ -35,7 +38,7 @@ public class MenuService {
     }
 
     public boolean delete(int id) {
-        return checkNotFoundById(menuRepository.deleteById(id), id) != 0;
+        return checkNotFoundById(menuDeletion.delete(id), id) != 0;
     }
 
     //returns one Menu item

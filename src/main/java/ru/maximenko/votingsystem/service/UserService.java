@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.maximenko.votingsystem.model.User;
-import ru.maximenko.votingsystem.repository.UserRepository;
+import ru.maximenko.votingsystem.repository.user.UserRepository;
 
 import java.util.List;
 

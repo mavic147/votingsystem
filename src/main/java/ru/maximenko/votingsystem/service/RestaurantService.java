@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.maximenko.votingsystem.model.Restaurant;
-import ru.maximenko.votingsystem.repository.RestaurantRepository;
+import ru.maximenko.votingsystem.repository.restaurant.RestaurantRepository;
 
 import java.time.LocalDate;
 
