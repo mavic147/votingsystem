@@ -3,6 +3,7 @@ DELETE FROM USERS;
 DELETE FROM USER_ROLES;
 DELETE FROM RESTAURANTS;
 DELETE FROM MENU;
+DELETE FROM RATING;
 
 INSERT INTO roles (id_role, name)
 VALUES (100000, 'user'),
@@ -32,3 +33,13 @@ VALUES (100008, 100006, 'Ham & mushrooms pizza', 600),
        (100012, 100007, 'Doughnut with strawberry glaze', 150),
        (100013, 100007, 'Hot chocolate', 315),
        (100014, 100007, 'Doughnut with banana filling', 165);
+
+INSERT INTO rating(id_rating, id_user, assessment, id_restaurant)
+VALUES (100015, 100002, 5, 100006),
+       (100016, 100003, 4, 100006),
+       (100017, 100004, 3, 100006),
+       (100018, 100005, 5, 100006),
+       (100019, 100002, 4, 100007),
+       (100020, 100003, 2, 100007),
+       (100021, 100004, 4, 100007),
+       (100022, 100005, 4, 100007);

@@ -59,4 +59,3 @@ CREATE TABLE rating
     date_create TIMESTAMP DEFAULT now() NOT NULL,
     FOREIGN KEY (id_restaurant) REFERENCES restaurants(id_restaurant) ON DELETE CASCADE
 );
-CREATE UNIQUE INDEX rating_unique_assessment_idx ON rating(assessment);
