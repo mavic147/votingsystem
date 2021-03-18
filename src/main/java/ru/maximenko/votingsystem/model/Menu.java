@@ -40,6 +40,22 @@ public class Menu extends AbstractBaseEntity {
 
     public Menu() {}
 
+    public int getIdRestaurant() {
+        return idRestaurant;
+    }
+
+    public void setIdRestaurant(int idRestaurant) {
+        this.idRestaurant = idRestaurant;
+    }
+
+    public String getDishName() {
+        return dishName;
+    }
+
+    public void setDishName(String dishName) {
+        this.dishName = dishName;
+    }
+
     public Double getDishPrice() {
         return dishPrice;
     }

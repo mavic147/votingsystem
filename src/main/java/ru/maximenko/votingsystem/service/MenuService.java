@@ -31,7 +31,7 @@ public class MenuService {
 
     public Menu update(Menu menu) {
         Assert.notNull(menu, "Menu must not be null!");
-        if (!menu.isNew() && get(menu.getId()) == null) {
+        if (!menu.isNew() && get(menu.getId(), menu.getIdRestaurant()) == null) {
             return null;
         }
         return menuRepository.save(menu);
@@ -42,8 +42,8 @@ public class MenuService {
     }
 
     //returns one Menu item
-    public Menu get(int id) {
-        return checkNotFoundById(menuRepository.findById(id).orElse(null), id);
+    public Menu get(int id, int restaurantId) {
+        return checkNotFoundById(menuRepository.findByIdAndIdRestaurant(id, restaurantId).orElse(null), id);
     }
 
     //returns all dishes belonging to a certain restaurant
