@@ -12,7 +12,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface MenuRepository extends JpaRepository<Menu, Integer> {
 
-    @Query("SELECT m.dishName, m.dishPrice FROM Menu m WHERE m.idRestaurant =: restaurantId")
+    @Query("SELECT m.dishName, m.dishPrice FROM Menu m WHERE m.idRestaurant =: restaurantId AND m.deleted = false")
     List<Menu> findDishesByRestaurantId(@Param("restaurantId")int restaurantId);
 
     Optional<Menu> findByIdAndIdRestaurant(int id, int restaurantId);

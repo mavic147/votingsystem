@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.Set;
@@ -36,9 +37,9 @@ public class User extends AbstractNamedEntity {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-//    public User(User user) {
-//        this(user.getId(), user.getName(), user.email, user.getPassword(), new Date());
-//    }
+    public User(User user) {
+        this(user.getId(), user.getName(), user.getEmail(), user.getPassword(), user.getRegistrationDate(), user.getRoles());
+    }
 
     public User(Integer id, String name, String email, String password, Date registrationDate, Set<Role> roles) {
         super(id, name);

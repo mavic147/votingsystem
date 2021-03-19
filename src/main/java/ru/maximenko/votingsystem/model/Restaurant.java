@@ -7,6 +7,10 @@ import javax.persistence.Table;
 @Table(name = "restaurants")
 public class Restaurant extends AbstractNamedEntity {
 
+    public Restaurant(Restaurant restaurant) {
+        this(restaurant.getId(), restaurant.getName());
+    }
+
     public Restaurant(Integer id, String name) {
         super(id, name);
     }

@@ -31,6 +31,10 @@ public class Menu extends AbstractBaseEntity {
     @NotNull
     private boolean deleted;
 
+    public Menu(Menu menu) {
+        this(menu.getId(), menu.getIdRestaurant(), menu.getDishName(), menu.getDishPrice(), menu.getDateChange(), menu.isDeleted());
+    }
+
     public Menu(Integer id, int idRestaurant, String dishName, Double dishPrice, LocalDate dateChange, boolean deleted) {
         super(id);
         this.idRestaurant = idRestaurant;
