@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.maximenko.votingsystem.model.Menu;
-import ru.maximenko.votingsystem.repository.CustomizedMenuDeletionImpl;
+import ru.maximenko.votingsystem.repository.CustomizedMenuDeletion;
 import ru.maximenko.votingsystem.repository.MenuRepository;
 
 import java.util.List;
@@ -15,14 +15,11 @@ import static ru.maximenko.votingsystem.util.EntityValidationUtil.checkNotFound;
 @Service
 public class MenuService {
 
+    @Autowired
     private MenuRepository menuRepository;
-    private CustomizedMenuDeletionImpl menuDeletion;
 
     @Autowired
-    public void setMenuRepository(MenuRepository menuRepository, CustomizedMenuDeletionImpl menuDeletion) {
-        this.menuRepository = menuRepository;
-        this.menuDeletion = menuDeletion;
-    }
+    private CustomizedMenuDeletion menuDeletion;
 
     public Menu create(Menu menu) {
         Assert.notNull(menu, "Menu must not be null!");

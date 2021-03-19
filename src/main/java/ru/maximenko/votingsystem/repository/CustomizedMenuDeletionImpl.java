@@ -1,12 +1,10 @@
 package ru.maximenko.votingsystem.repository;
 
-import org.springframework.stereotype.Repository;
 import ru.maximenko.votingsystem.model.Menu;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@Repository
 public class CustomizedMenuDeletionImpl implements CustomizedMenuDeletion {
 
     @PersistenceContext

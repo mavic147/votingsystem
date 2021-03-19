@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.maximenko.votingsystem.model.User;
 
 @Transactional(readOnly = true)
-@Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Transactional
