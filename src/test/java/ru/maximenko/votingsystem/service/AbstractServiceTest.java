@@ -14,5 +14,5 @@ import ru.maximenko.votingsystem.util.MyStopWatch;
 public abstract class AbstractServiceTest {
 
     @Rule
-    MyStopWatch stopWatch = new MyStopWatch();
+    public MyStopWatch stopWatch = new MyStopWatch();
 }

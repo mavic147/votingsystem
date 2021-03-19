@@ -1,6 +1,6 @@
+DELETE FROM USER_ROLES;
 DELETE FROM ROLES;
 DELETE FROM USERS;
-DELETE FROM USER_ROLES;
 DELETE FROM RESTAURANTS;
 DELETE FROM MENU;
 DELETE FROM RATING;
@@ -25,6 +25,7 @@ VALUES (100002, 100000),
 INSERT INTO restaurants (id_restaurant, name)
 VALUES (100006, 'Il Patio'),
        (100007, 'Doughnuts & Coffee');
+
 
 INSERT INTO menu (id_menu, id_restaurant, name_dish, price_dish)
 VALUES (100008, 100006, 'Ham & mushrooms pizza', 600),

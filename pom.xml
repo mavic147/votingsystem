@@ -39,6 +39,12 @@
 
   <dependencies>
 
+    <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+
     <!-- Spring -->
     <!-- Чтобы добавить Spring Cache нужна dependency spring-context-support-->
     <dependency>
@@ -130,6 +136,10 @@
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
+          <configuration>
+            <source>1.15</source>
+            <target>1.15</target>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>

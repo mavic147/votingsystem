@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.maximenko.votingsystem.model.Menu;
-import ru.maximenko.votingsystem.repository.menu.CustomizedMenuDeletionImpl;
-import ru.maximenko.votingsystem.repository.menu.MenuRepository;
+import ru.maximenko.votingsystem.repository.CustomizedMenuDeletionImpl;
+import ru.maximenko.votingsystem.repository.MenuRepository;
 
 import java.util.List;
 
@@ -29,16 +29,16 @@ public class MenuService {
         return checkNotFound(menuRepository.save(menu), "menu" + menu);
     }
 
-    public Menu update(Menu menu) {
+    public Menu update(Menu menu, int restId) {
         Assert.notNull(menu, "Menu must not be null!");
-        if (!menu.isNew() && get(menu.getId(), menu.getIdRestaurant()) == null) {
+        if (!menu.isNew() && get(menu.getId(), menu.getIdRestaurant()) == null && menu.getIdRestaurant() != restId) {
             return null;
         }
         return menuRepository.save(menu);
     }
 
-    public boolean delete(int id) {
-        return checkNotFoundById(menuDeletion.delete(id), id) != 0;
+    public boolean delete(int id, int restId) {
+        return checkNotFoundById(menuDeletion.delete(id, restId), id) != 0;
     }
 
     //returns one Menu item
