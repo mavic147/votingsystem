@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.maximenko.votingsystem.model.Menu;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
@@ -17,5 +16,4 @@ public interface MenuRepository extends JpaRepository<Menu, Integer>, Customized
     @Query("SELECT m.dishName, m.dishPrice FROM Menu m WHERE m.restaurantId =: restaurantId AND m.deleted = false")
     List<Menu> findDishesByRestaurantId(@Param("restaurantIdt") int restaurantId);
 
-    Optional<Menu> findByIdMenuAndRestaurantId(int idMenu, int restaurantId);
 }

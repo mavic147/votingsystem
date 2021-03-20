@@ -36,7 +36,7 @@ public class MenuService {
 
     //returns one Menu item
     public Menu get(int id, int restaurantId) {
-        return checkNotFoundById(menuRepository.findByIdMenuAndRestaurantId(id, restaurantId).orElse(null), id);
+        return checkNotFoundById(menuRepository.findById(id).filter(menu -> menu.getRestaurantId() == restaurantId).orElse(null), id);
     }
 
     //returns all dishes belonging to a certain restaurant

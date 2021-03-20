@@ -1,47 +1,49 @@
-DELETE FROM USER_ROLES;
-DELETE FROM ROLES;
-DELETE FROM USERS;
-DELETE FROM RESTAURANTS;
-DELETE FROM MENU;
-DELETE FROM RATING;
+DELETE FROM USER_ROLES where 1=1;
+DELETE FROM ROLES where 1=1 ;
+DELETE FROM USERS where 1=1;
+DELETE FROM RESTAURANTS where 1=1;
+DELETE FROM MENU where 1=1;
+DELETE FROM RATING where 1=1;
 ALTER SEQUENCE GLOBAL_SEQ RESTART WITH 100000;
 
-INSERT INTO roles (id_role, name)
-VALUES (100000, 'user'),
-       (100001, 'admin');
+INSERT INTO roles (id, name)
+VALUES (NEXT VALUE FOR GLOBAL_SEQ, 'user'),
+       (NEXT VALUE FOR GLOBAL_SEQ, 'admin');
 
-INSERT INTO users (id_user, name, email, password)
-VALUES (100002, 'UserBob', 'bob@mail.ru', 'bob123'),
-       (100003, 'UserAngelina', 'angelina@gmail.com', 'angelina555'),
-       (100004, 'AdminSteve', 'steve@yahoo.com', 'steve321'),
-       (100005, 'AdminCarmen', 'carmen@yandex.ru', 'carm567');
+INSERT INTO users (id, name, email, password)
+VALUES (NEXT VALUE FOR GLOBAL_SEQ, 'UserBob', 'bob@mail.ru', 'bob123'),
+       (NEXT VALUE FOR GLOBAL_SEQ, 'UserAngelina', 'angelina@gmail.com', 'angelina555'),
+       (NEXT VALUE FOR GLOBAL_SEQ, 'AdminSteve', 'steve@yahoo.com', 'steve321'),
+       (NEXT VALUE FOR GLOBAL_SEQ, 'AdminCarmen', 'carmen@yandex.ru', 'carm567');
 
 INSERT INTO USER_ROLES(id_user, id_role)
-VALUES (100002, 100000),
-       (100003, 100000),
-       (100004, 100001),
-       (100005, 100001);
+VALUES ((select id from USERS where name = 'UserBob'), (select id from ROLES where name = 'user')),
+       ((select id from USERS where name = 'UserAngelina'), (select id from ROLES where name = 'user')),
+       ((select id from USERS where name = 'AdminSteve'), (select id from ROLES where name = 'admin')),
+       ((select id from USERS where name = 'AdminCarmen'), (select id from ROLES where name = 'admin'));
 
-INSERT INTO restaurants (id_restaurant, name)
-VALUES (100006, 'Il Patio'),
-       (100007, 'Doughnuts & Coffee');
+INSERT INTO restaurants (id, name)
+VALUES (NEXT VALUE FOR GLOBAL_SEQ, 'Il Patio'),
+       (NEXT VALUE FOR GLOBAL_SEQ, 'Doughnuts & Coffee');
 
 
-INSERT INTO menu (id_menu, id_restaurant, name_dish, price_dish)
-VALUES (100008, 100006, 'Ham & mushrooms pizza', 600),
-       (100009, 100006, 'Pasta', 580),
-       (100010, 100006, 'Apple Pie', 340),
-       (100011, 100007, 'Cappuccino', 368),
-       (100012, 100007, 'Doughnut with strawberry glaze', 150),
-       (100013, 100007, 'Hot chocolate', 315),
-       (100014, 100007, 'Doughnut with banana filling', 165);
+INSERT INTO menu (id, id_restaurant, name_dish, price_dish)
+VALUES (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Il Patio'), 'Ham & mushrooms pizza', 600),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Il Patio'), 'Pasta', 580),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Il Patio'), 'Apple Pie', 340),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Doughnuts & Coffee'), 'Cappuccino', 368),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Doughnuts & Coffee'), 'Doughnut with strawberry glaze', 150),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Doughnuts & Coffee'), 'Hot chocolate', 315),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Doughnuts & Coffee'), 'Doughnut with banana filling', 165);
 
-INSERT INTO rating(id_rating, id_user, assessment, id_restaurant)
-VALUES (100015, 100002, 5, 100006),
-       (100016, 100003, 4, 100006),
-       (100017, 100004, 3, 100006),
-       (100018, 100005, 5, 100006),
-       (100019, 100002, 4, 100007),
-       (100020, 100003, 2, 100007),
-       (100021, 100004, 4, 100007),
-       (100022, 100005, 4, 100007);
+INSERT INTO rating(id, id_user, assessment, id_restaurant)
+VALUES (NEXT VALUE FOR GLOBAL_SEQ, (select id from USERS where name = 'UserBob'), 5, (select id from RESTAURANTS where NAME = 'Il Patio')),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from USERS where name = 'UserAngelina'), 4, (select id from RESTAURANTS where NAME = 'Il Patio')),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from USERS where name = 'AdminSteve'), 3, (select id from RESTAURANTS where NAME = 'Il Patio')),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from USERS where name = 'AdminCarmen'), 5, (select id from RESTAURANTS where NAME = 'Il Patio')),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from USERS where name = 'UserBob'), 4, (select id from RESTAURANTS where NAME = 'Doughnuts & Coffee')),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from USERS where name = 'UserAngelina'), 2, (select id from RESTAURANTS where NAME = 'Doughnuts & Coffee')),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from USERS where name = 'AdminSteve'), 4, (select id from RESTAURANTS where NAME = 'Doughnuts & Coffee')),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from USERS where name = 'AdminCarmen'), 4, (select id from RESTAURANTS where NAME = 'Doughnuts & Coffee'));
+
+commit;
