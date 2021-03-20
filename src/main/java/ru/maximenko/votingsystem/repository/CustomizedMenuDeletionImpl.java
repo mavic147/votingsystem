@@ -13,7 +13,7 @@ public class CustomizedMenuDeletionImpl implements CustomizedMenuDeletion {
     @Override
     public int delete(int id, int restId) {
         Menu menu = em.find(Menu.class, id);
-        if (menu != null && menu.getIdRestaurant() == restId) {
+        if (menu != null && menu.getRestaurantId() == restId) {
             menu.setDeleted(true);
             return 1;
         }

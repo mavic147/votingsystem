@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.maximenko.votingsystem.model.Menu;
-import ru.maximenko.votingsystem.repository.CustomizedMenuDeletion;
 import ru.maximenko.votingsystem.repository.MenuRepository;
 
 import java.util.List;
@@ -18,9 +17,6 @@ public class MenuService {
     @Autowired
     private MenuRepository menuRepository;
 
-    @Autowired
-    private CustomizedMenuDeletion menuDeletion;
-
     public Menu create(Menu menu) {
         Assert.notNull(menu, "Menu must not be null!");
         return checkNotFound(menuRepository.save(menu), "menu" + menu);
@@ -28,19 +24,19 @@ public class MenuService {
 
     public Menu update(Menu menu, int restId) {
         Assert.notNull(menu, "Menu must not be null!");
-        if (!menu.isNew() && get(menu.getId(), menu.getIdRestaurant()) == null && menu.getIdRestaurant() != restId) {
+        if (!menu.isNew() && get(menu.getId(), menu.getRestaurantId()) == null && menu.getRestaurantId() != restId) {
             return null;
         }
         return menuRepository.save(menu);
     }
 
     public boolean delete(int id, int restId) {
-        return checkNotFoundById(menuDeletion.delete(id, restId), id) != 0;
+        return checkNotFoundById(menuRepository.delete(id, restId), id) != 0;
     }
 
     //returns one Menu item
     public Menu get(int id, int restaurantId) {
-        return checkNotFoundById(menuRepository.findByIdAndIdRestaurant(id, restaurantId).orElse(null), id);
+        return checkNotFoundById(menuRepository.findByIdAndRestaurantId(id, restaurantId).orElse(null), id);
     }
 
     //returns all dishes belonging to a certain restaurant

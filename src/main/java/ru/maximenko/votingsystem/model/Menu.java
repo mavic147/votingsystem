@@ -13,7 +13,7 @@ public class Menu extends AbstractBaseEntity {
 
     @Column(name = "id_restaurant", nullable = false)
     @NotNull
-    private int idRestaurant;
+    private int restaurantId;
 
     @Column(name = "name_dish", nullable = false)
     @NotBlank
@@ -32,12 +32,12 @@ public class Menu extends AbstractBaseEntity {
     private boolean deleted;
 
     public Menu(Menu menu) {
-        this(menu.getId(), menu.getIdRestaurant(), menu.getDishName(), menu.getDishPrice(), menu.getDateChange(), menu.isDeleted());
+        this(menu.getId(), menu.getRestaurantId(), menu.getDishName(), menu.getDishPrice(), menu.getDateChange(), menu.isDeleted());
     }
 
-    public Menu(Integer id, int idRestaurant, String dishName, Double dishPrice, LocalDate dateChange, boolean deleted) {
+    public Menu(Integer id, int restaurantId, String dishName, Double dishPrice, LocalDate dateChange, boolean deleted) {
         super(id);
-        this.idRestaurant = idRestaurant;
+        this.restaurantId = restaurantId;
         this.dishName = dishName;
         this.dishPrice = dishPrice;
         this.dateChange = dateChange;
@@ -46,12 +46,12 @@ public class Menu extends AbstractBaseEntity {
 
     public Menu() {}
 
-    public int getIdRestaurant() {
-        return idRestaurant;
+    public int getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setIdRestaurant(int idRestaurant) {
-        this.idRestaurant = idRestaurant;
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public String getDishName() {
