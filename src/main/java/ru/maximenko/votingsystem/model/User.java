@@ -32,8 +32,8 @@ public class User extends AbstractNamedEntity {
     private Date registrationDate;
 
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "id_user"))
-    @Column(name = "id_role")
+    @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "name")
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
