@@ -13,7 +13,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 public interface MenuRepository extends JpaRepository<Menu, Integer>, CustomizedMenuDeletion {
 
-    @Query("SELECT m.dishName, m.dishPrice FROM Menu m WHERE m.restaurantId =: restaurantId AND m.deleted = false")
-    List<Menu> findDishesByRestaurantId(@Param("restaurantIdt") int restaurantId);
+    @Query("SELECT m FROM Menu m WHERE m.restaurantId =:restId AND m.deleted = false")
+    List<Menu> findDishesByRestaurantId(@Param("restId") int restaurantId);
 
 }
