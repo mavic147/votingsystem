@@ -11,6 +11,7 @@ import static ru.maximenko.votingsystem.util.RestaurantMockData.RESTAURANT_ID;
 public class MenuMockData {
 
     public static final int MENU_ID = START_SEQ + 8;
+    public static final int NOT_FOUND = START_SEQ + 50;
 
     public static final Menu dish1 = new Menu(MENU_ID, RESTAURANT_ID, "Ham & mushrooms pizza", 600d,
             LocalDate.now(), false);

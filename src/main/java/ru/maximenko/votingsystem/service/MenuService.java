@@ -24,19 +24,24 @@ public class MenuService {
 
     public Menu update(Menu menu, int restId) {
         Assert.notNull(menu, "Menu must not be null!");
-        if (!menu.isNew() && get(menu.getId(), menu.getRestaurantId()) == null && menu.getRestaurantId() != restId) {
+        if (!menu.isNew() && get(menu.getId(), restId) == null) {
             return null;
         }
         return menuRepository.save(menu);
     }
 
     public boolean delete(int id, int restId) {
-        return checkNotFoundById(menuRepository.delete(id, restId), id) != 0;
+        if (menuRepository.delete(id, restId) != 0) {
+            return true;
+        } else {
+            get(id, restId);
+            return false;
+        }
     }
 
     //returns one Menu item
     public Menu get(int id, int restaurantId) {
-        return checkNotFoundById(menuRepository.findById(id).filter(menu -> menu.getRestaurantId() == restaurantId).orElse(null), id);
+        return checkNotFoundById(menuRepository.findByIdAndRestaurantId(id, restaurantId).orElse(null), id);
     }
 
     //returns all dishes belonging to a certain restaurant
