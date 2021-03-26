@@ -1,6 +1,5 @@
 package ru.maximenko.votingsystem.model;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;

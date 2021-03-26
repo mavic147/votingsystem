@@ -22,7 +22,12 @@ public class UserService {
     }
 
     public boolean delete(int id) {
-        return checkNotFoundById(userRepository.deleteById(id), id) != 0;
+        if (userRepository.deleteById(id) != 0) {
+            return true;
+        } else {
+            get(id);
+            return false;
+        }
     }
 
     public User getByEmail(String email) {
