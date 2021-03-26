@@ -16,7 +16,8 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
 
     @Transactional
     @Modifying
-    int deleteById(int id);
+    @Query("DELETE FROM Restaurant r WHERE r.id =:id")
+    int deleteById(@Param("id") int id);
 
     @Query("SELECT AVG(r.assessment) FROM Rating r WHERE r.idRestaurant =: idRestaurant AND r.dateCreate =: dateCreate")
     Double countRating(@Param("idRestaurant") int id, @Param("dateCreate") LocalDate date);

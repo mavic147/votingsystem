@@ -38,7 +38,12 @@ public class RestaurantService {
     }
 
     public boolean delete(int id) {
-        return checkNotFoundById(restaurantRepository.deleteById(id), id) != 0;
+        if (restaurantRepository.deleteById(id) != 0) {
+            return true;
+        } else {
+            get(id);
+            return false;
+        }
     }
 
     //this method will be invoked from controller layer with RestaurantService object
