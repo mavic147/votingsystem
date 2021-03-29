@@ -1,5 +1,7 @@
 package ru.maximenko.votingsystem.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
@@ -7,8 +9,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Collections;
 import java.util.Date;
-import java.util.EnumSet;
 import java.util.Set;
 
 @Entity
@@ -30,10 +32,15 @@ public class User extends AbstractNamedEntity {
     @NotNull
     private Date registrationDate;
 
-    @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "name")
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.JOIN)
+    @JoinTable(name = "user_roles",
+            joinColumns = {
+                    @JoinColumn(name = "id_user", referencedColumnName = "id",
+                            nullable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "id_role", referencedColumnName = "id",
+                            nullable = false, updatable = false)})
     private Set<Role> roles;
 
     public User(User user) {
@@ -79,6 +86,6 @@ public class User extends AbstractNamedEntity {
     }
 
     public void setRoles(Set<Role> role) {
-        this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
+        this.roles = CollectionUtils.isEmpty(roles) ? Collections.emptySet() : Set.copyOf(role);
     }
 }
