@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface CustomizedMenuDeletion {
+public interface CustomizedDishDeletion {
 
     @Transactional
     @Modifying
-    int delete(int id, int restaurantId);
+    int delete(int id);
 }

@@ -9,6 +9,10 @@ import javax.validation.constraints.NotNull;
 @Table(name = "dishes")
 public class Dish extends AbstractNamedEntity {
 
+    @Column(name = "deleted", nullable = false)
+    @NotNull
+    private boolean deleted;
+
     public Dish() {}
 
     public Dish(Integer id, String name, @NotNull boolean deleted) {
@@ -19,10 +23,6 @@ public class Dish extends AbstractNamedEntity {
     public Dish(Dish dish) {
         this(dish.getId(), dish.getName(), dish.isDeleted());
     }
-
-    @Column(name = "deleted", nullable = false)
-    @NotNull
-    private boolean deleted;
 
     public boolean isDeleted() {
         return deleted;

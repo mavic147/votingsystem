@@ -40,7 +40,7 @@ public class MenuMockData {
     public static final List<Menu> rest2Menu = List.of(menu4, menu5, menu6, menu7);
 
     public static Menu getNew() {
-        return new Menu(null, RESTAURANT1_ID, DISH4_ID, 499d, LocalDate.now());
+        return new Menu(null, RESTAURANT1_ID, DISH4_ID, 390d, LocalDate.now());
     }
 
     public static Menu getUpdated() {
