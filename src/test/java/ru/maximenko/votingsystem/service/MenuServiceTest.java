@@ -21,7 +21,7 @@ public class MenuServiceTest extends AbstractServiceTest {
     @Test
     public void getOne() {
         Menu actual = menuService.get(MENU1_ID, RESTAURANT1_ID);
-        assertThat(actual).usingRecursiveComparison().ignoringFields("dateChange").isEqualTo(dish1);
+        assertThat(actual).usingRecursiveComparison().ignoringFields("dateChange").isEqualTo(menu1);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class MenuServiceTest extends AbstractServiceTest {
     public void updateNotOwn() {
         EntityNotFoundException ex = assertThrows(EntityNotFoundException.class, () -> menuService.update(getUpdated(), RESTAURANT2_ID));
         assertEquals("Not found entity with id = " + (MENU2_ID), ex.getMessage());
-        assertThat(menuService.get(MENU2_ID, RESTAURANT1_ID)).usingRecursiveComparison().ignoringFields("dateChange").isEqualTo(dish2);
+        assertThat(menuService.get(MENU2_ID, RESTAURANT1_ID)).usingRecursiveComparison().ignoringFields("dateChange").isEqualTo(menu2);
     }
 
     @Test

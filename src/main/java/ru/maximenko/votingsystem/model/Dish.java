@@ -11,6 +11,15 @@ public class Dish extends AbstractNamedEntity {
 
     public Dish() {}
 
+    public Dish(Integer id, String name, @NotNull boolean deleted) {
+        super(id, name);
+        this.deleted = deleted;
+    }
+
+    public Dish(Dish dish) {
+        this(dish.getId(), dish.getName(), dish.isDeleted());
+    }
+
     @Column(name = "deleted", nullable = false)
     @NotNull
     private boolean deleted;
