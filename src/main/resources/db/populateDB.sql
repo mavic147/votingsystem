@@ -2,6 +2,7 @@ DELETE FROM USER_ROLES where 1=1;
 DELETE FROM ROLES where 1=1 ;
 DELETE FROM USERS where 1=1;
 DELETE FROM RESTAURANTS where 1=1;
+DELETE FROM DISHES where 1=1;
 DELETE FROM MENU where 1=1;
 DELETE FROM RATING where 1=1;
 ALTER SEQUENCE GLOBAL_SEQ RESTART WITH 100000;
@@ -26,15 +27,23 @@ INSERT INTO restaurants (id, name)
 VALUES (NEXT VALUE FOR GLOBAL_SEQ, 'Il Patio'),
        (NEXT VALUE FOR GLOBAL_SEQ, 'Doughnuts & Coffee');
 
+INSERT INTO dishes (id, name, deleted)
+VALUES (NEXT VALUE FOR GLOBAL_SEQ, 'Ham & mushrooms pizza', false),
+       (NEXT VALUE FOR GLOBAL_SEQ, 'Pasta', false),
+       (NEXT VALUE FOR GLOBAL_SEQ, 'Apple Pie', false),
+       (NEXT VALUE FOR GLOBAL_SEQ, 'Cappuccino', false),
+       (NEXT VALUE FOR GLOBAL_SEQ, 'Doughnut with strawberry glaze', false),
+       (NEXT VALUE FOR GLOBAL_SEQ, 'Hot chocolate', false),
+       (NEXT VALUE FOR GLOBAL_SEQ, 'Doughnut with banana filling', false);
 
-INSERT INTO menu (id, id_restaurant, name_dish, price_dish)
-VALUES (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Il Patio'), 'Ham & mushrooms pizza', 600),
-       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Il Patio'), 'Pasta', 580),
-       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Il Patio'), 'Apple Pie', 340),
-       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Doughnuts & Coffee'), 'Cappuccino', 368),
-       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Doughnuts & Coffee'), 'Doughnut with strawberry glaze', 150),
-       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Doughnuts & Coffee'), 'Hot chocolate', 315),
-       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Doughnuts & Coffee'), 'Doughnut with banana filling', 165);
+INSERT INTO menu (id, id_restaurant, id_dish, price_dish)
+VALUES (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Il Patio'), (Select id from dishes where name = 'Ham & mushrooms pizza'), 600),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Il Patio'), (Select id from dishes where name = 'Pasta'), 580),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Il Patio'), (Select id from dishes where name = 'Apple Pie'), 340),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Doughnuts & Coffee'), (Select id from dishes where name = 'Cappuccino'), 368),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Doughnuts & Coffee'), (Select id from dishes where name ='Doughnut with strawberry glaze'), 150),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Doughnuts & Coffee'), (Select id from dishes where name = 'Hot chocolate'), 315),
+       (NEXT VALUE FOR GLOBAL_SEQ, (select id from RESTAURANTS where NAME = 'Doughnuts & Coffee'), (Select id from dishes where name = 'Doughnut with banana filling'), 165);
 
 INSERT INTO rating(id, id_user, assessment, id_restaurant)
 VALUES (NEXT VALUE FOR GLOBAL_SEQ, (select id from USERS where name = 'UserBob'), 5, (select id from RESTAURANTS where NAME = 'Il Patio')),

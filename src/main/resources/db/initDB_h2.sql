@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS dishes;
 DROP TABLE IF EXISTS menu;
 DROP TABLE IF EXISTS rating;
 DROP TABLE IF EXISTS restaurants;
@@ -41,17 +42,25 @@ CREATE TABLE restaurants
 );
 CREATE UNIQUE INDEX restaurants_unique_name_idx ON restaurants (name);
 
+CREATE TABLE dishes
+(
+    id INT DEFAULT GLOBAL_SEQ.nextval PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    deleted BOOLEAN DEFAULT FALSE NOT NULL
+);
+CREATE UNIQUE INDEX dish_unique_name_idx ON dishes (name);
+
 CREATE TABLE menu
 (
     id INT DEFAULT GLOBAL_SEQ.nextval PRIMARY KEY,
     id_restaurant INTEGER NOT NULL,
-    name_dish VARCHAR(200) NOT NULL,
+    id_dish VARCHAR(200) NOT NULL,
     price_dish INTEGER NOT NULL,
     date_last TIMESTAMP DEFAULT now() NOT NULL,
-    deleted BOOLEAN DEFAULT FALSE NOT NULL,
-    FOREIGN KEY (id_restaurant) REFERENCES restaurants(id) ON DELETE CASCADE
+    FOREIGN KEY (id_restaurant) REFERENCES restaurants(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_dish) REFERENCES dishes(id) ON DELETE CASCADE
 );
-CREATE UNIQUE INDEX menu_unique_dishname_restaurant_idx ON menu (id_restaurant, name_dish);
+CREATE UNIQUE INDEX menu_unique_dish_idx ON menu (id_restaurant, id_dish);
 
 CREATE TABLE rating
 (

@@ -15,9 +15,9 @@ public class Menu extends AbstractBaseEntity {
     @NotNull
     private int restaurantId;
 
-    @Column(name = "name_dish", nullable = false)
-    @NotBlank
-    private String dishName;
+    @Column(name = "id_dish", nullable = false)
+    @NotNull
+    private int dishId;
 
     @Column(name = "price_dish", nullable = false)
     @NotNull
@@ -27,21 +27,16 @@ public class Menu extends AbstractBaseEntity {
     @NotNull
     private LocalDate dateChange;
 
-    @Column(name = "deleted", nullable = false)
-    @NotNull
-    private boolean deleted;
-
     public Menu(Menu menu) {
-        this(menu.getId(), menu.getRestaurantId(), menu.getDishName(), menu.getDishPrice(), menu.getDateChange(), menu.isDeleted());
+        this(menu.getId(), menu.getRestaurantId(), menu.getDishId(), menu.getDishPrice(), menu.getDateChange());
     }
 
-    public Menu(Integer id, int restaurantId, String dishName, Double dishPrice, LocalDate dateChange, boolean deleted) {
+    public Menu(Integer id, int restaurantId, int dishId, Double dishPrice, LocalDate dateChange) {
         super(id);
         this.restaurantId = restaurantId;
-        this.dishName = dishName;
+        this.dishId = dishId;
         this.dishPrice = dishPrice;
         this.dateChange = dateChange;
-        this.deleted = deleted;
     }
 
     public Menu() {}
@@ -54,12 +49,12 @@ public class Menu extends AbstractBaseEntity {
         this.restaurantId = restaurantId;
     }
 
-    public String getDishName() {
-        return dishName;
+    public int getDishId() {
+        return dishId;
     }
 
-    public void setDishName(String dishName) {
-        this.dishName = dishName;
+    public void setDishId(int dishId) {
+        this.dishId = dishId;
     }
 
     public Double getDishPrice() {
@@ -78,11 +73,4 @@ public class Menu extends AbstractBaseEntity {
         this.dateChange = dateChange;
     }
 
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
 }
