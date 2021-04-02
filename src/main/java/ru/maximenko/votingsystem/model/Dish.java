@@ -3,10 +3,11 @@ package ru.maximenko.votingsystem.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "dishes")
+@Table(name = "dishes", uniqueConstraints = @UniqueConstraint(columnNames = "name", name = "dish_unique_name_idx"))
 public class Dish extends AbstractNamedEntity {
 
     @Column(name = "deleted", nullable = false)

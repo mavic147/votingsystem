@@ -6,11 +6,12 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "menu")
+@Table(name = "menu", uniqueConstraints = @UniqueConstraint(columnNames = {"id_restaurant", "id_dish"}, name = "menu_unique_dish_idx"))
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Menu extends AbstractBaseEntity {
 

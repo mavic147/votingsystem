@@ -1,10 +1,11 @@
 package ru.maximenko.votingsystem.model;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.*;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -14,7 +15,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email", name = "users_unique_email_idx"))
 public class User extends AbstractNamedEntity {
 
     @Column(name = "email", nullable = false, unique = true)
@@ -41,6 +42,8 @@ public class User extends AbstractNamedEntity {
             inverseJoinColumns = {
                     @JoinColumn(name = "id_role", referencedColumnName = "id",
                             nullable = false, updatable = false)})
+    @BatchSize(size = 100)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Role> roles;
 
     public User(User user) {
