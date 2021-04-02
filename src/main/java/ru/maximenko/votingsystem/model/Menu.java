@@ -1,5 +1,8 @@
 package ru.maximenko.votingsystem.model;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -8,6 +11,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "menu")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Menu extends AbstractBaseEntity {
 
     @Column(name = "id_restaurant", nullable = false)
