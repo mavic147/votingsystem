@@ -13,6 +13,7 @@ public class DishMockData {
     public static final int DISH5_ID = DISH4_ID + 1;
     public static final int DISH6_ID = DISH5_ID + 1;
     public static final int DISH7_ID = DISH6_ID + 1;
+    public static final int DISH_NOT_FOUND = START_SEQ + 576;
 
     public static final Dish dish1 = new Dish(DISH1_ID, "Ham & mushrooms pizza", false);
     public static final Dish dish2 = new Dish(DISH2_ID, "Pasta", false);
