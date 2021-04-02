@@ -23,6 +23,6 @@ public interface MenuRepository extends JpaRepository<Menu, Integer> {
 
     @Modifying
     @Transactional
-    @Query("DELETE FROM Menu m WHERE m.id =:id")
-    int delete(@Param("id") int id);
+    @Query("DELETE FROM Menu m WHERE m.id =:id AND m.restaurantId =:restaurantId")
+    int delete(@Param("id") int id, @Param("restaurantId") int restaurantId);
 }

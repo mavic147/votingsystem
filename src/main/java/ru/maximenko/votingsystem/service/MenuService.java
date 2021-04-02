@@ -31,7 +31,7 @@ public class MenuService {
     }
 
     public boolean delete(int id, int restId) {
-        if (menuRepository.delete(id) != 0) {
+        if (menuRepository.delete(id, restId) != 0) {
             return true;
         } else {
             get(id, restId);
