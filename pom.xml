@@ -36,8 +36,11 @@
     <slf4j.version>1.7.30</slf4j.version>
     <logback.version>1.2.3</logback.version>
 
-      <!-- Cache -->
+    <!-- Cache -->
     <ehcache.version>3.9.2</ehcache.version>
+
+    <!-- Web -->
+    <tomcat.version>9.0.43</tomcat.version>
   </properties>
 
   <dependencies>
@@ -86,7 +89,6 @@
       <version>${spring-test.version}</version>
       <scope>test</scope>
     </dependency>
-
 
     <!--ORM-->
     <dependency>
@@ -144,6 +146,25 @@
       </exclusions>
     </dependency>
 
+    <!-- Web -->
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-servlet-api</artifactId>
+      <version>${tomcat.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -199,6 +220,12 @@
           <artifactId>hsqldb</artifactId>
           <version>2.3.4</version>
           <scope>runtime</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.tomcat</groupId>
+          <artifactId>tomcat-jdbc</artifactId>
+          <version>${tomcat.version}</version>
+          <scope>provided</scope>
         </dependency>
       </dependencies>
       <activation>
